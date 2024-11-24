@@ -13,3 +13,11 @@ html.dark {
 .borderBlack {
   @apply border border-black/10;
 }
+
+.more {
+  color: rgb(14, 14, 105);
+  font-style: italic;
+}
+.more:hover {
+  text-decoration: underline;
+}

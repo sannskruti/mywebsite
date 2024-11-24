@@ -19,6 +19,9 @@ export default function Projects() {
           </React.Fragment>
         ))}
       </div>
+      <a className="more" href="https://github.com/Sannskruti">
+        See More...
+      </a>
     </section>
   );
 }
