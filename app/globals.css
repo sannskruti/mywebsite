@@ -21,3 +21,7 @@ html.dark {
 .more:hover {
   text-decoration: underline;
 }
+
+.dark .more {
+  color: rgb(255, 255, 255);
+}
