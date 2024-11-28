@@ -8,8 +8,6 @@ import imageSearch from "@/public/imageSearch.png";
 import produce from "@/public/produce.png";
 
 
-
-
 export const links = [
   {
     name: "Home",
@@ -132,26 +130,23 @@ export const projectsData = [
 ] as const;
 
 export const skillsData = [
-  "JavaScript",
-  "TypeScript", 
-  "React",
-  "Next.js",
   "Node.js",
-  "Express",
-  "Git",
-  "Tailwind",
-  "Redux",
+  "React",
+  "TypeScript", 
+  "JavaScript",
   "GraphQL",
   "REST API",
+  "Azure",
   "Ansible",
-  "Java",
+  "Express",
+  "Git",
+  "Java", 
   "Python",
   "MYSQL",
   "MongoDB",
   "Mongoose",
   "PostgreSQL",
   "Mendix ",
-  "Azure",
   "AWS",
   "HTML",
   "CSS",
