@@ -18,53 +18,22 @@ export default function About() {
       id="about"
     >
       <SectionHeading>About me</SectionHeading>
-      {/* <p className="mb-3">
-        During my time developing applications for{" "}
-        <span className="font-medium">
-          Financial and Pharmaceutical Services in the Netherlands and India
-        </span>
-        , I decided to broaden my expertise in application development. I
-        enrolled in
-        <span className="font-medium">
-          {" "}
-          Masters in Information Systems
-        </span>{" "}
-        from
-        <span className="font-medium"> Northeastern University</span>, Boston
-        and learned{" "}
-        <span className="font-medium">full-stack web development</span>.{" "}
-        <span className="italic">My favorite part of programming</span> is the
-        problem-solving through brainstorming aspect. I{" "}
-        <span className="underline">love</span> the feeling of finally figuring
-        out a solution to a problem and discuss it with teammates. My core stack
-        is <span className="font-medium">React, Node.js, and MongoDB</span>. I
-        am also an expert in TypeScript and Java. I am always looking to learn
-        new technologies.
-      </p>
 
-      <p>
-        <span className="italic">When I'm not coding</span>, I enjoy playing
-        badminton, making potrait sketches, and definately experimenting in
-        cooking! I also enjoy{" "}
-        <span className="font-medium">learning new things</span>. I am currently
-        learning about{" "}
-        <span className="font-medium">history and philosophy</span>. I'm also
-        learning how to play the guitar, and honing my skills in swimming!
-      </p> */}
       <p className="mb-3">
         While working on web applications for{" "}
         <span className="underline">Financial</span> and{" "}
         <span className="underline">Pharmaceutical Services</span> in{" "}
-        <span className="font-medium"> the Netherlands </span> and
-        <span className="font-medium"> India</span> , I uncovered a passion for
-        creating efficient software solutions. To expand my expertise, I pursued
-        a <span className="font-medium"> Master’s in Information Systems </span>{" "}
+        <span className="font-medium"> the Netherlands 🇳🇱</span> and
+        <span className="font-medium"> India 🇮🇳</span> , I uncovered a passion
+        for creating efficient software solutions. To expand my expertise, I
+        pursued a{" "}
+        <span className="font-medium"> Master’s in Information Systems </span>{" "}
         at{" "}
         <span className="font-medium"> Northeastern University, Boston </span>
         where I specialized in{" "}
         <span className="font-medium">full-stack web development </span>. During
-        my <span className="font-medium">internship</span> at NBCUniversal as a
-        Site Reliability Engineer, I gained exposure to Ansible automation,{" "}
+        my <span className="font-medium">internship</span> at NBCUniversal,NY,
+        USA 🇺🇸 as a Software Engineer, I gained exposure to Ansible automation,{" "}
         <span className="font-medium">optimizing deployment processes</span>,{" "}
         <span className="font-medium">front-end development</span> and{" "}
         <span className="underline"> Media-tech industry</span>.
