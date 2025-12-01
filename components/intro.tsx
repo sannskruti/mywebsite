@@ -17,6 +17,7 @@ import { HiDownload } from "react-icons/hi";
 import { FaGithubSquare } from "react-icons/fa";
 import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
+import RotatingText from "./rotatingtext";
 
 export default function Intro() {
   const { ref } = useSectionInView("Home", 0.5);
@@ -66,24 +67,35 @@ export default function Intro() {
       </div>
       <motion.h1
         className="mb-10 mt-4 px-4 text-2xl font-medium !leading-[1.5] sm:text-4xl"
-        initial={{ opacity: 0, y: 100 }}
+        initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, delay: 0.25 }}
       >
-        {/* <span className="font-bold">Hello, I'm Sanskruti Manoria.</span> I'm a{" "}
-        <span className="font-bold">Software Engineer</span> with professional
-        experience in building, deploying and maintaining{" "}
-        <span className="italic">websites & apps</span>. My focus is{" "}
-        <span className="underline"> Application Development</span> and{" "}
-        <span className="underline"> DevOps</span> */}
-        <span className="font-bold">Hello, I’m Sanskruti Manoria.</span>
-        <div>
-          I am a {""}
-          <span className="underline"> Software Engineer </span>with experience
-          in building, deploying, and maintaining modern web applications. My
-          work focuses on application development, cloud infrastructure, and
-          DevOps practices that help teams ship reliable software at scale.
+        <span className="font-bold text-4xl sm:text-5xl">
+          Hello, I’m Sanskruti Manoria.
+        </span>
+
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <div className="flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-gray-900 dark:text-white">
+            <span>I build</span>
+            <RotatingText
+              items={[
+                "Full-Stack SaaS Apps",
+                "AI-Powered Solutions",
+                "Scalable Cloud Apps",
+                "Innovative Products",
+              ]}
+            />
+          </div>
+
+          <p className="mt-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 max-w-2xl">
+            Experienced in building scalable applications, cloud infrastructure,
+            and AI-powered solutions using React, Java, Python, AWS, Azure, and
+            modern DevOps technologies.
+          </p>
         </div>
       </motion.h1>
+
       <motion.div
         className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium"
         initial={{ opacity: 0, y: 100 }}
@@ -100,7 +112,7 @@ export default function Intro() {
             setTimeOfLastClick(Date.now());
           }}
         >
-          Contact me here{" "}
+          Contact{" "}
           <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
         </Link>
         {/* <a

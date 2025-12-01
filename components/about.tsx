@@ -59,29 +59,41 @@ export default function About() {
         improving my <span className="font-medium">swimming</span> skills.
       </p> */}
       <p>
-        I am a software engineer with hands-on experience building and deploying
-        production-grade applications across finance, pharmaceuticals, and
-        media-tech in India 🇮🇳, the Netherlands 🇳🇱, and the United States 🇺🇸.
-        Working in these diverse and highly regulated environments taught me to
-        value reliability, clarity, and strong engineering practices. To
-        strengthen my technical foundation, I pursued a Master’s in Information
-        Systems at Northeastern University in Boston, where I focused on
-        full-stack engineering and scalable web architectures. During my
-        Software Engineer internship at NBCUniversal in New York, I contributed
-        to automation workflows using Ansible, improved deployment pipelines,
-        and supported front-end development in a large engineering ecosystem. I
-        enjoy solving real engineering problems, from understanding system
-        requirements and constraints to designing clean and maintainable
-        solutions. My experience includes React, Node.js, FastAPI, MongoDB,
-        CI/CD pipelines, cloud deployments, and Agile delivery. I care deeply
-        about writing code that is readable, efficient, and built to scale.
-        Outside of engineering, I stay curious through portrait sketching,
-        cooking experiments, and learning subjects such as history and
-        philosophy. I am also working on improving my swimming skills. I enjoy
-        balancing creativity with technical discipline while continuing to grow
-        as an engineer. My goal is to build software that is dependable,
-        thoughtfully engineered, and genuinely useful to the people who rely on
-        it.
+        I am a{" "}
+        <b>
+          <u>Software Engineer</u>{" "}
+        </b>
+        with hands-on experience building and deploying production-grade
+        applications across media-tech, finance and pharmaceuticals in the
+        United States 🇺🇸, the Netherlands 🇳🇱 and India 🇮🇳 for over 5 years with
+        20+ applications on production. Working in these diverse and highly
+        regulated environments taught me to value reliability, clarity, and
+        strong engineering practices. To go beyond with latest technologies, I
+        pursued a <u>Master’s in Information Systems </u> at{" "}
+        <b>Northeastern University</b> in Boston, Massachusetts, where I focused
+        on Distributed systems, Artifical Intelligence and scalable web
+        architectures. During my Software Engineer internship at NBCUniversal in
+        New York, I contributed to automation workflows using Ansible, improved
+        deployment pipelines, and supported front-end development in a large
+        engineering ecosystem. I enjoy solving real engineering problems, from
+        understanding system requirements and constraints to designing clean and
+        maintainable solutions.{" "}
+      </p>
+      <p>
+        My experience includes React, Node.js, FastAPI, MongoDB, CI/CD
+        pipelines, cloud deployments, and Agile delivery. I care deeply about
+        taking end-to-end ownership of writing code that is readable, efficient,
+        and built to scale.
+      </p>
+      <br></br>
+      <p>
+        Outside of engineering, I stay curious through portrait sketching ✍️,
+        cooking experiments 🥕, photography 📸 and learning subjects such as
+        history and philosophy 📚. I am also working on improving my swimming
+        skills 🏊‍♀️. I enjoy balancing creativity with technical discipline while
+        continuing to grow as an engineer. My goal is to build software that is
+        dependable, thoughtfully engineered, and genuinely useful to the people
+        who rely on it.
       </p>
     </motion.section>
   );
