@@ -26,7 +26,7 @@ export default function RotatingText({
     <div
       className="
     relative inline-flex 
-    w-[150px] sm:w-[170px] md:w-[190px] 
+    w-[160px] sm:w-[170px] md:w-[190px] 
     h-8 sm:h-9 
     items-center justify-center px-3
     rounded-lg border border-slate-300/60 shadow-sm
