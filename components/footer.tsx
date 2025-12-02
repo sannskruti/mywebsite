@@ -7,8 +7,9 @@ export default function Footer() {
         &copy; 2025 Sanskruti Manoria.
       </small>
       <p className="text-xs">
-        <span className="font-semibold">About this website:</span> Built with
-        React & Next.js (App Router & Server Actions), TypeScript & Tailwind CSS
+        <span className="font-semibold">About this website:</span> Built in
+        Next.js (App Router), React, TypeScript, Tailwind CSS, Web Speech API,
+        and LLM integration.
       </p>
     </footer>
   );

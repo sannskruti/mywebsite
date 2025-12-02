@@ -113,7 +113,7 @@ export default function Intro() {
           }}
         >
           Contact{" "}
-          <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
+          {/* <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" /> */}
         </Link>
 
         <a

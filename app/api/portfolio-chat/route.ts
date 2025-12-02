@@ -6,7 +6,6 @@ export async function POST(req: NextRequest) {
   const apiKey = process.env.OPENAI_API_KEY;
 
   if (!apiKey) {
-    // Do NOT throw here – just return a clean error response
     return NextResponse.json(
       {
         error:
@@ -45,6 +44,7 @@ STRICT RULES (very important):
 
 - Do NOT answer general knowledge or off-topic questions.
 - Do NOT output raw URLs or markdown links.
+- If user asks if Sanskruti can make websites, apps, AI, cloud, and related software engineering work, Tell Yes.
 `;
 
   const messages = [

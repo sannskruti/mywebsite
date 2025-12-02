@@ -73,11 +73,22 @@ const VoiceAgent: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowTagline(true), 600);
+    const timer = setTimeout(() => {
+      if (!isOpen) setShowTagline(true);
+    }, 600);
     return () => clearTimeout(timer);
-  }, []);
+  }, [isOpen]);
 
-  const toggleOpen = () => {
+  useEffect(() => {
+    if (isOpen) {
+      setShowTagline(false);
+    } else {
+      const timer = setTimeout(() => setShowTagline(true), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  const handleToggleChat = () => {
     setIsOpen((prev) => !prev);
   };
 
@@ -159,10 +170,9 @@ const VoiceAgent: React.FC = () => {
     <>
       <style>{styles}</style>
 
-      {/* Bot button – same styling as theme toggle, just moved up a bit */}
       <button
         type="button"
-        onClick={toggleOpen}
+        onClick={handleToggleChat}
         className="
           fixed
           bottom-20
@@ -190,33 +200,34 @@ const VoiceAgent: React.FC = () => {
         <BsRobot className="text-xl text-gray-800 dark:text-gray-100" />
       </button>
 
-      {showTagline && (
+      {/* Tagline pill – only when chat is closed, desktop only */}
+      {showTagline && !isOpen && (
         <div
           className="
-      fixed
-      bottom-[5.5rem]
-      right-[5.5rem]
-      hidden
-      md:flex
-      items-center
-      rounded-full
-      bg-white
-      bg-opacity-80
-      backdrop-blur-[0.5rem]
-      px-3
-      py-1.5
-      text-[11px]
-      font-medium
-      shadow-2xl
-      border
-      border-white
-      border-opacity-40
-      dark:bg-gray-950
-      dark:text-gray-100
-      ai-tagline-pop
-      w-auto
-      whitespace-nowrap
-    "
+            fixed
+            bottom-[5.6rem]
+            right-[5.5rem]
+            hidden
+            md:flex
+            items-center
+            rounded-full
+            bg-white
+            bg-opacity-80
+            backdrop-blur-[0.5rem]
+            px-3
+            py-1
+            text-[11px]
+            font-medium
+            shadow-2xl
+            border
+            border-white
+            border-opacity-40
+            dark:bg-gray-950
+            dark:text-gray-100
+            w-auto
+            whitespace-nowrap
+            ai-tagline-pop
+          "
         >
           Talk to my AI voice bot
         </div>
@@ -246,7 +257,7 @@ const VoiceAgent: React.FC = () => {
           <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 dark:border-gray-700">
             <div className="text-sm font-semibold">AI Portfolio Assistant</div>
             <button
-              onClick={toggleOpen}
+              onClick={handleToggleChat}
               className="text-xs opacity-70 hover:opacity-100"
             >
               ✕
@@ -260,7 +271,7 @@ const VoiceAgent: React.FC = () => {
             {messages_list.length === 0 && (
               <div className="space-y-1 text-xs text-gray-500 dark:text-gray-400">
                 <p className="font-semibold text-gray-700 dark:text-gray-100">
-                  Try this AI voice agent 👇
+                  Try talking to my AI voice agent 👇
                 </p>
                 <p>
                   Ask about my projects, tech stack, experience, or anything you
@@ -277,7 +288,7 @@ const VoiceAgent: React.FC = () => {
                 }`}
               >
                 <div
-                  className={`rounded-2xl px-3 py-2 max-w-[85%] whitespace-pre-wrap break-words break-all ${
+                  className={`rounded-2xl px-3 py-2 max-w-[85%] whitespace-normal break-words ${
                     msg.role === "user"
                       ? "bg-blue-500 text-white"
                       : "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100"
