@@ -200,7 +200,6 @@ const VoiceAgent: React.FC = () => {
         <BsRobot className="text-xl text-gray-800 dark:text-gray-100" />
       </button>
 
-      {/* Tagline pill – only when chat is closed, desktop only */}
       {showTagline && !isOpen && (
         <div
           className="
@@ -255,7 +254,7 @@ const VoiceAgent: React.FC = () => {
           "
         >
           <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 dark:border-gray-700">
-            <div className="text-sm font-semibold">AI Portfolio Assistant</div>
+            <div className="text-sm font-semibold"> Portfolio Assistant</div>
             <button
               onClick={handleToggleChat}
               className="text-xs opacity-70 hover:opacity-100"
