@@ -114,24 +114,65 @@ const VoiceAgent: React.FC = () => {
         }),
       });
 
-      const data = await res.json();
+      let data: any = null;
+      try {
+        data = await res.json();
+      } catch (e) {
+        console.error("Failed to parse JSON:", e);
+      }
+
       if (!res.ok) {
-        console.error("API error:", data);
+        const fallback =
+          data?.reply ||
+          data?.message ||
+          "Sorry, something went wrong on the server.";
         setMessages_list((prev) => [
           ...prev,
-          { role: "assistant", content: "Sorry, something went wrong." },
+          { role: "assistant", content: fallback },
         ]);
-      } else {
+        return;
+      }
+
+      if (data?.errorType === "rate_limit") {
         setMessages_list((prev) => [
           ...prev,
           { role: "assistant", content: data.reply },
         ]);
+        return;
+      }
+
+      if (data?.errorType === "openai_error") {
+        setMessages_list((prev) => [
+          ...prev,
+          { role: "assistant", content: data.reply },
+        ]);
+        return;
+      }
+
+      if (data?.reply) {
+        setMessages_list((prev) => [
+          ...prev,
+          { role: "assistant", content: data.reply },
+        ]);
+      } else {
+        setMessages_list((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content:
+              "I couldn’t generate a response. Ask me about Sanskruti’s skills, projects, or experience.",
+          },
+        ]);
       }
     } catch (err) {
-      console.error(err);
+      console.error("Fetch failed:", err);
       setMessages_list((prev) => [
         ...prev,
-        { role: "assistant", content: "Network error, try again." },
+        {
+          role: "assistant",
+          content:
+            "I’m having trouble reaching the server. Please check your connection and try again.",
+        },
       ]);
     } finally {
       setIsLoading(false);

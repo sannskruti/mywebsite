@@ -46,7 +46,7 @@ export const experiencesData = [
     title: "NBCUniversal, New York City, NY ",
     designation: "Software Engineer Co-op",
     description:
-      "Developed automation solutions and created a web app  with React.js achieving a 99% deployment time reduction",
+      "Built end-to-end automation pipelines and a React.js app that reduced deployment time by 99%, improving system reliability and speeding releases across NBCUniversal’s engineering ecosystem.",
     icon: React.createElement("img", {
       src: nbculogo.src,
       alt: "NBCUniversal",

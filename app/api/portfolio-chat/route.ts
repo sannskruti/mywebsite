@@ -2,13 +2,62 @@ import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { links, experiencesData, projectsData, skillsData } from "@/lib/data";
 
+// ====== COMPACT SUMMARIES ========== ========================================================
+const skillsSummary = Array.isArray(skillsData)
+  ? skillsData
+      .map((s: any) => {
+        if (typeof s === "string") return s;
+        if (s?.name) return s.name;
+        return "";
+      })
+      .filter(Boolean)
+      .join(", ")
+  : "";
+
+const projectSummary = Array.isArray(projectsData)
+  ? projectsData
+      .map((p: any) => {
+        const title = p?.title ?? "Untitled project";
+        const tech = Array.isArray(p?.techStack)
+          ? p.techStack.join(", ")
+          : Array.isArray(p?.technologies)
+          ? p.technologies.join(", ")
+          : "";
+        return tech ? `${title} (tech: ${tech})` : title;
+      })
+      .join("\n")
+  : "";
+
+const experienceSummary = Array.isArray(experiencesData)
+  ? experiencesData
+      .map((e: any) => {
+        const role = e?.role ?? "Role";
+        const company = e?.company ?? "Company";
+        const start = e?.start ?? "";
+        const end = e?.end ?? "Present";
+        const tech = Array.isArray(e?.tech) ? e.tech.join(", ") : "";
+        return `${role} at ${company} (${start}–${end})${
+          tech ? ` – ${tech}` : ""
+        }`;
+      })
+      .join("\n")
+  : "";
+
+const linksSummary = Array.isArray(links)
+  ? links
+      .map((l: any) => (l?.label && l?.href ? `${l.label}: ${l.href}` : ""))
+      .filter(Boolean)
+      .join("\n")
+  : "";
+// ================================================================================================
+
 export async function POST(req: NextRequest) {
   const apiKey = process.env.OPENAI_API_KEY;
-
   if (!apiKey) {
     return NextResponse.json(
       {
-        error:
+        errorType: "server_config",
+        message:
           "AI assistant is not configured on the server (missing OPENAI_API_KEY).",
       },
       { status: 500 }
@@ -16,50 +65,46 @@ export async function POST(req: NextRequest) {
   }
 
   const openai = new OpenAI({ apiKey });
-
   const body = await req.json();
   const { message, history } = body as {
     message: string;
     history?: { role: "user" | "assistant"; content: string }[];
   };
 
-  if (!message) {
-    return NextResponse.json({ error: "No message provided" }, { status: 400 });
+  if (!message || typeof message !== "string") {
+    return NextResponse.json(
+      { errorType: "bad_request", message: "No message provided." },
+      { status: 400 }
+    );
   }
 
+  const MAX_HISTORY = 6;
+  const trimmedHistory = history
+    ? history.slice(Math.max(history.length - MAX_HISTORY, 0))
+    : [];
+
   const portfolioContext = `
-You are an AI assistant for Sanskruti’s portfolio website. 
-You must only answer questions related to:
-- her skills
-- her tech stack
-- her projects
-- her experience
-- her education
-- what she does
-- what she has built
-- her work history
-- her professional background
-- roles she has worked in
-- technologies she uses
-- portfolio content
+You are an AI assistant for Sanskruti’s portfolio website.
 
-The user may refer indirectly using “she”, “her work”, 
-“tell about her”, “what does she do?”, “her experience”,"cloud applications","distributed systems","AI" etc. 
-ALL of these MUST be treated as portfolio-related.
+You MUST answer only based on the portfolio info below.
 
-If the user asks ANYTHING outside of her professional background 
-(e.g., politics, general knowledge, facts, jokes, history, science, definitions), 
-respond with:
+SKILLS:
+${skillsSummary}
 
-“I can help only with Sanskruti’s skills, experience, and projects. 
-Ask me something about her work 😊”
+PROJECTS:
+${projectSummary}
 
-You have access to this information:
-- Skills: ${JSON.stringify(skillsData)}
-- Projects: ${JSON.stringify(projectsData)}
-- Experience: ${JSON.stringify(experiencesData)}
-- Links: ${JSON.stringify(links)}
+EXPERIENCE:
+${experienceSummary}
 
+LINKS:
+${linksSummary}
+
+If the user asks anything NOT about her skills, tech stack, projects,
+experience, education, or work, respond with EXACTLY:
+
+"I can help only with Sanskruti’s skills, experience, and projects. 
+Ask me something about her work 😊"
 `;
 
   const messages = [
@@ -68,15 +113,38 @@ You have access to this information:
     { role: "user" as const, content: message },
   ];
 
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages,
-    temperature: 0.3,
-  });
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages,
+      temperature: 0.3,
+    });
 
-  const reply =
-    completion.choices[0]?.message?.content ??
-    "Sorry, I couldn’t generate a response.";
+    const reply =
+      completion.choices[0]?.message?.content ??
+      "Sorry, I couldn’t generate a response.";
 
-  return NextResponse.json({ reply });
+    return NextResponse.json({ reply }, { status: 200 });
+  } catch (err: any) {
+    console.error("OpenAI error:", err);
+    if (err?.status === 429 || err?.code === "rate_limit_exceeded") {
+      return NextResponse.json(
+        {
+          errorType: "rate_limit",
+          reply:
+            "I’ve hit my AI usage limit for now and can’t answer at the moment. Please try again later.",
+        },
+        { status: 200 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        errorType: "openai_error",
+        message:
+          "I ran into a problem answering that. Please ask about Sanskruti’s skills, experience, or projects again.",
+      },
+      { status: 500 }
+    );
+  }
 }
