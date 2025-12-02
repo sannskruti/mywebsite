@@ -192,6 +192,7 @@ export const skillsData = [
   "Express",
   "React",
   "Redux",
+  "Angular",
   "Next.js",
   "TypeScript",
   "JavaScript",
