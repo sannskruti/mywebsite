@@ -90,8 +90,8 @@ export default function Intro() {
 
           <p className="mt-4 text-base sm:text-lg text-gray-700 dark:text-gray-300 max-w-2xl">
             Experienced in building scalable applications, cloud infrastructure,
-            and AI-powered solutions using React, Java, Python, AWS, Azure, and
-            modern DevOps technologies.
+            and AI-powered solutions using Python, React, GCP, Azure, and modern
+            DevOps technologies.
           </p>
         </div>
       </motion.h1>
